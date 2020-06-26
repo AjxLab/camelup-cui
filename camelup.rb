@@ -15,14 +15,20 @@ class CamelUp
     # コンストラクタ
     #--------------------------------------------
     @n_players = 4
+    @type = [41, 42, 43, 44, 47]
 
     # calculate terminal size
     @weight = `tput cols`.to_i
-    @weight = (@weight  - 5*(@n_players-1) - 10) / @n_players * @n_players + 5*(@n_players-1)
-    @height = `tput lines`.to_i - 10
+    @weight = (@weight  - 5*(@n_players-1) - 6) / @n_players * @n_players + 5*(@n_players-1)
+    @height = `tput lines`.to_i - 4
 
     draw_frame
-    sleep 3
+    draw_horse(0, 0, 0)
+    draw_horse(1, 0, 2)
+    draw_horse(2, 0, 4)
+    draw_horse(3, 12, 2)
+    draw_horse(4, 12, 4)
+    sleep 10
   end
 
 
@@ -30,18 +36,50 @@ class CamelUp
     #--------------------------------------------
     # 画面フレームを描画
     #--------------------------------------------
-    puts "#" * (@weight+10)
-    (@height+8).times {
-      print "#    " <<
+    puts "#" * (@weight+6)
+    (@height+2).times {
+      print "#  " <<
       " " * @weight <<
-      "    #"
+      "  #"
       puts
     }
-    print "#" * (@weight+10)
+    print "#" * (@weight+6)
 
     # move cursor to the initial position
-    print "\e[#{@height+10}A\e[#{@weight+10}D"
+    print "\e[#{@height+4}A\e[#{@weight+6}D"
   end
+
+
+  def draw_horse(type, x, y)
+    #--------------------------------------------
+    # 馬を描画
+    #--------------------------------------------
+    # params:
+    #   - type;int -> 描画する馬のタイプ（0〜4）
+    #   - x:int -> 描画開始するX座標
+    #   - y:int -> 描画開始するY座標
+    #--------------------------------------------
+    x += 3
+    y += 2
+
+    horse = [
+      "ooo oo oo",
+      " oooooooo",
+      "   o  o",
+    ]
+    horse.map! { |line| line.gsub(' ', "\e[1C") }
+    horse.map! { |line| line.gsub('o', "\e[#{@type[type]}m \e[0m") }
+
+    # draw
+    print "\e[#{y}B"
+    horse.each do |line|
+      print "\e[#{x}C#{line}\n"
+    end
+
+    # move cursor to the initial position
+    print "\e[#{@height+4}A\e[#{@weight+6}D"
+  end
+
 
   def connect(roomid, roompw)
     #--------------------------------------------
