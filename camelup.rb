@@ -14,14 +14,34 @@ class CamelUp
     #--------------------------------------------
     # コンストラクタ
     #--------------------------------------------
-    # params:
-    #   - roomid:string -> 接続先のRoomID
-    #   - roompw:string -> 接続先のRoomPW
-    # return:
-    #   - 接続に成功したか？
-    #--------------------------------------------
+    @n_players = 4
+
+    # calculate terminal size
+    @weight = `tput cols`.to_i
+    @weight = (@weight  - 5*(@n_players-1) - 10) / @n_players * @n_players + 5*(@n_players-1)
+    @height = `tput lines`.to_i - 10
+
+    draw_frame
+    sleep 3
   end
 
+
+  def draw_frame
+    #--------------------------------------------
+    # 画面フレームを描画
+    #--------------------------------------------
+    puts "#" * (@weight+10)
+    (@height+8).times {
+      print "#    " <<
+      " " * @weight <<
+      "    #"
+      puts
+    }
+    print "#" * (@weight+10)
+
+    # move cursor to the initial position
+    print "\e[#{@height+10}A\e[#{@weight+10}D"
+  end
 
   def connect(roomid, roompw)
     #--------------------------------------------
@@ -36,6 +56,7 @@ class CamelUp
     return true
   end
 end
+
 
 
 if __FILE__ == $0
