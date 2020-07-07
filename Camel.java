@@ -36,14 +36,18 @@ public class Camel {
         String camel[] = this.shape;
 
         // replace template shape to colored space
-        for(int i=0; i<3; i++) {
+        for (int i = 0; i < 3; i++) {
             camel[i] = camel[i].replace(" ", "\u001b[1C");
             camel[i] = camel[i].replace("*", "\u001b[00;" + this.color + "m \u001b[00m");
         }
 
         System.out.println("\u001b[" + this.y + "B");
-        for(int i=0; i<3; i++) {
+        for (int i = 0; i < 3; i++) {
             System.out.println("\u001b[" + this.x + "C" + camel[i]);
         }
+
+        // move cursor to the initial position
+        System.out.print("\u001b[" + (this.y + 4) + "A");
+        System.out.print("\u001b[9D");
     }
 }
