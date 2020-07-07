@@ -18,57 +18,85 @@ public class Camels {
         this.field = new Integer[this.n_square][this.n_camels];
     }
 
-    public Camel camel(int index) {
-        if (index < 0 || index >= this.n_camels) {
+    public Camel camel(int camel_id) {
+        if (camel_id < 0 || camel_id >= this.n_camels) {
             System.err.printf("There are only %d camels.\n", this.n_camels);
             System.err.printf("Please specify a value between 0 and %d.\n", this.n_camels - 1);
             return null;
         }
 
-        return this.camels[index];
+        return this.camels[camel_id];
     }
 
-    public void move(int camel_id, int dice) {
-        int current = 0;
+    public int getRank(int camel_id) {
+        int rank = this.n_camels;
 
-        // search field's index of <camel_id>
         for (int i = 0; i < this.n_square; i++) {
             for (int j = 0; j < this.n_camels; j++) {
                 if (this.field[i][j] == null)
                     break;
+
                 if (this.field[i][j] == camel_id) {
-                    // set null in current position
-                    this.field[i][j] = null;
-                    current = i;
+                    return rank;
+                } else {
+                    rank--;
                 }
             }
         }
 
+        return rank;
+    }
+
+    public Integer[] getPosition(int camel_id) {
+        Integer current[] = { null, null };
+
+        for (int i = 0; i < this.n_square; i++) {
+            for (int j = 0; j < this.n_camels; j++) {
+                if (this.field[i][j] == null)
+                    break;
+
+                if (this.field[i][j] == camel_id) {
+                    current[0] = i;
+                    current[1] = j;
+                }
+            }
+        }
+
+        return current;
+    }
+
+    public void move(int camel_id, int dice) {
+        // search current index
+        Integer current[] = this.getPosition(camel_id);
+        if (current[0] == null) {
+            current[0] = 0;
+            current[1] = 0;
+        } else {
+            this.field[current[0]][current[1]] = null;
+        }
+
         // if goal
-        if (current + dice >= this.n_square) {
+        if (current[0] + dice >= this.n_square) {
             // --------------------
             // Goal processing
             // --------------------
+            System.out.println("GOAL!!");
             return;
         }
 
-        for (int j = 0; j < this.n_camels; j++) {
-            if (this.field[current + dice][j] == null) {
-                this.field[current + dice][j] = camel_id;
+        for (int i = 0; i < this.n_camels; i++) {
+            if (this.field[current[0] + dice][i] == null) {
+                this.field[current[0] + dice][i] = camel_id;
                 return;
             }
         }
     }
 
     public void display() {
-        for (int i = 0; i < this.n_square; i++) {
-            for (int j = 0; j < this.n_camels; j++) {
-                if (this.field[i][j] == null)
-                    break;
-
-                this.camel(this.field[i][j]).setPosition(i * 9, (this.n_camels - j) * 2);
-                this.camel(this.field[i][j]).draw();
-            }
+        for (int i = 0; i < this.n_camels; i++) {
+            Integer current[] = this.getPosition(i);
+            this.camel(i).setPosition(current[0] * 10, (this.n_camels - current[1]) * 2);
+            this.camel(i).draw();
         }
     }
 }

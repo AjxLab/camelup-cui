@@ -43,11 +43,11 @@ public class Camel {
 
         System.out.println("\u001b[" + this.y + "B");
         for (int i = 0; i < 3; i++) {
-            System.out.println("\u001b[" + this.x + "C" + camel[i]);
+            System.out.println("\u001b[" + (this.x+1) + "C" + camel[i]);
         }
 
         // move cursor to the initial position
         System.out.print("\u001b[" + (this.y + 4) + "A");
-        System.out.print("\u001b[9D");
+        System.out.print("\u001b[11D");
     }
 }

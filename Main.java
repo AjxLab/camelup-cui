@@ -13,7 +13,7 @@ public class Main {
 
         camels.display();
 
-        System.out.print("\u001b[25B");
+        System.out.print("\u001b[15B");
     }
 
     private static int dice(int range_max) {
