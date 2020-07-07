@@ -5,7 +5,7 @@ public class Camel {
     private String shape[];
 
     public Camel(int x, int y, int color) {
-        // init position
+        // init positionk
         this.x = x;
         this.y = y;
 
@@ -14,9 +14,9 @@ public class Camel {
 
         // shape of the camel
         this.shape = new String[3];
-        this.shape[0] = "*** ** **";
-        this.shape[1] = " ********";
-        this.shape[2] = "   *  *  ";
+        this.shape[0] = "** ** ***";
+        this.shape[1] = "******** ";
+        this.shape[2] = "  *  *   ";
     }
 
     public int[] getPosition() {
