@@ -1,15 +1,23 @@
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
-        Camels camels = new Camels(6);
-        camels.camel(0).move(0, 0);
-        camels.camel(1).move(0, 2);
-        camels.camel(2).move(0, 4);
-        camels.camel(3).move(12, 2);
-        camels.camel(4).move(12, 4);
+        final int N_CAMELS = 5;
 
-        for (int i = 0; i < 5; i++) {
-            camels.camel(i).draw();
+        // generate camels list
+        Camels camels = new Camels(N_CAMELS);
+
+        for(int i=0; i<N_CAMELS; i++) {
+            camels.move(i, dice(3));
         }
-        System.out.print("\u001b[15B");
+
+        camels.display();
+
+        System.out.print("\u001b[25B");
+    }
+
+    private static int dice(int range_max) {
+        Random rand = new Random();
+        return rand.nextInt(range_max);
     }
 }
