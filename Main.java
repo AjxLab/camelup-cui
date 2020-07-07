@@ -18,6 +18,6 @@ public class Main {
 
     private static int dice(int range_max) {
         Random rand = new Random();
-        return rand.nextInt(range_max);
+        return rand.nextInt(range_max) + 1;
     }
 }

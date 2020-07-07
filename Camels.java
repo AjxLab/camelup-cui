@@ -47,8 +47,8 @@ public class Camels {
         return rank;
     }
 
-    public Integer[] getPosition(int camel_id) {
-        Integer current[] = { null, null };
+    public int[] getPosition(int camel_id) {
+        int current[] = { -1, -1 };
 
         for (int i = 0; i < this.n_square; i++) {
             for (int j = 0; j < this.n_camels; j++) {
@@ -65,18 +65,15 @@ public class Camels {
         return current;
     }
 
-    public void move(int camel_id, int dice) {
+    public void move(int camel_id, int dist) {
         // search current index
-        Integer current[] = this.getPosition(camel_id);
-        if (current[0] == null) {
-            current[0] = 0;
-            current[1] = 0;
-        } else {
+        int current[] = this.getPosition(camel_id);
+        if (current[0] >= 0) {
             this.field[current[0]][current[1]] = null;
         }
 
         // if goal
-        if (current[0] + dice >= this.n_square) {
+        if (current[0] + dist >= this.n_square) {
             // --------------------
             // Goal processing
             // --------------------
@@ -85,8 +82,8 @@ public class Camels {
         }
 
         for (int i = 0; i < this.n_camels; i++) {
-            if (this.field[current[0] + dice][i] == null) {
-                this.field[current[0] + dice][i] = camel_id;
+            if (this.field[current[0] + dist][i] == null) {
+                this.field[current[0] + dist][i] = camel_id;
                 return;
             }
         }
@@ -94,7 +91,7 @@ public class Camels {
 
     public void display() {
         for (int i = 0; i < this.n_camels; i++) {
-            Integer current[] = this.getPosition(i);
+            int current[] = this.getPosition(i);
             this.camel(i).setPosition(current[0] * 10, (this.n_camels - current[1]) * 2);
             this.camel(i).draw();
         }
