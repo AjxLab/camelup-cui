@@ -9,10 +9,10 @@ public class Camel {
         this.x = x;
         this.y = y;
 
-        // color of camel
+        // color of the camel
         this.color = color;
 
-        // camel's shape
+        // shape of the camel
         this.shape = new String[3];
         this.shape[0] = "*** ** **";
         this.shape[1] = " ********";
