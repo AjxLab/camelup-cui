@@ -1,15 +1,22 @@
 public class Camel {
-    private int id;
     private int color;
     private int x;
     private int y;
+    private String shape[];
 
-    public Camel(int id, int color) {
-        this.id = id;
+    public Camel(int x, int y, int color) {
+        // init position
+        this.x = x;
+        this.y = y;
+
+        // color of camel
         this.color = color;
 
-        this.x = 0;
-        this.y = 0;
+        // camel's shape
+        this.shape = new String[3];
+        this.shape[0] = "*** ** **";
+        this.shape[1] = " ********";
+        this.shape[2] = "   *  *  ";
     }
 
     public int[] getPosition() {
@@ -26,5 +33,17 @@ public class Camel {
     }
 
     public void draw() {
+        String camel[] = this.shape;
+
+        // replace template shape to colored space
+        for(int i=0; i<3; i++) {
+            camel[i] = camel[i].replace(" ", "\u001b[1C");
+            camel[i] = camel[i].replace("*", "\u001b[00;" + this.color + "m \u001b[00m");
+        }
+
+        System.out.println("\u001b[" + this.y + "B");
+        for(int i=0; i<3; i++) {
+            System.out.println("\u001b[" + this.x + "C" + camel[i]);
+        }
     }
 }
