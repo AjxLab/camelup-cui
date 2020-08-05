@@ -59,6 +59,9 @@
 /.vagrant/
 /.idea/
 /.vscode/
-/*.class
+/**/*.drawio
+/**/*.class
+/**/*.args
+/**/*.sh
 #---------------------------
 
