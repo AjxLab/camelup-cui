@@ -1,3 +1,5 @@
+package camel;
+
 public class Camels {
     private int n_camels;
     private Camel camels[];

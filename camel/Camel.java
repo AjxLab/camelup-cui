@@ -1,3 +1,5 @@
+package camel;
+
 public class Camel {
     private int color;
     private int x;
