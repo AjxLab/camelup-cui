@@ -5,15 +5,15 @@ require_relative './dialog'
 system('clear')
 
 @dialog = Dialog.instance
-@dialog.draw_frame
-@dialog.message 'あなたのターンです', center: true
+@dialog.reset
+@dialog.message 'あなたのターンです', center: true, start_y: 1
 @dialog.message(
   'サイコロを振る',
   '> 馬券を獲得する',
   'オアシスを配置する',
   '蜃気楼を配置する',
   start_x: 10,
-  start_y: 2
+  start_y: 3
 )
 
 sleep 3
