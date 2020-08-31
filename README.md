@@ -1,16 +1,17 @@
-CamelUp
-=======
+# CamelUp
 
 Play CamelUp on the terminal!
 
-
 ## Requirements
-* Java 8
-* JUnit 4
 
+- Ubuntu 20.04
+- Ruby ~> 2.7
 
-## Run Test
+## Installation
+
 ```sh
-$ bash -c "javac -Xlint:deprecation -Xlint:unchecked -cp .:./lib/* **/*.java && java -cp .:./lib/* org.junit.runner.JUnitCore test.<TestClass>"
-```
+$ git clone <this repo>
+$ cd <this repo>
 
+$ bundle install
+```
