@@ -2,7 +2,13 @@
 
 require_relative './dialog'
 
-system('clear')
+def draw_title
+  system('clear')
+  system('figlet -f slant CAMEL UP')
+  print "\e[6A"
+end
+
+draw_title
 
 @dialog = Dialog.instance
 @dialog.reset
