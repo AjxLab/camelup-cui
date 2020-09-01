@@ -11,6 +11,7 @@ class Dialog
   def initialize
     @width = 40
     @height = 8
+    @dialog_color = "\e[48;5;237m"
   end
 
   public
@@ -23,7 +24,7 @@ class Dialog
 
     msg.map! { |line| ' ' * ((width - length(line)) / 2) + line } if center
     msg.map! { |line| ' ' * x + "#{line}\e[#{length(line) + x}D\e[B" }
-    print "\e[40m#{msg.join}\e[0m"
+    print "#{@dialog_color}#{msg.join}\e[0m"
 
     print "\e[#{start_point[1] + msg.length + y}A\e[#{start_point[0]}D"
   end
@@ -38,7 +39,7 @@ class Dialog
     result = []
 
     height.times do |_y|
-      result << "\e[40m \e[0m" * width
+      result << "#{@dialog_color} \e[0m" * width
     end
 
     result
@@ -52,7 +53,7 @@ class Dialog
   end
 
   def length(str)
-    str = str.gsub /\e\[\d*[ABCDm]/, ''
+    str = str.gsub /\e\[[^m]*m/, ''
     str.length + str.chars.reject(&:ascii_only?).length
   end
 end
