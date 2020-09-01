@@ -1,3 +1,4 @@
+#! /usr/bin/env ruby
 # frozen_string_literal: true
 
 require_relative './dialog'
@@ -12,14 +13,14 @@ draw_title
 
 @dialog = Dialog.instance
 @dialog.reset
-@dialog.message 'あなたのターンです', center: true, start_y: 1
+@dialog.message 'あなたのターンです', center: true, y: 1
 @dialog.message(
   'サイコロを振る',
   '> 馬券を獲得する',
   'オアシスを配置する',
   '蜃気楼を配置する',
-  start_x: 10,
-  start_y: 3
+  x: 10,
+  y: 3
 )
 
 sleep 3
