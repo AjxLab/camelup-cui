@@ -15,3 +15,17 @@ $ cd <this repo>
 
 $ bundle install
 ```
+
+## Usage
+
+### Play CamelUP
+
+```sh
+$ ./src/camelup.rb
+```
+
+### Run Tests
+
+```sh
+$ rspec spec/*.rb
+```
