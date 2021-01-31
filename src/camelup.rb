@@ -34,14 +34,12 @@ while (key = STDIN.getch) != "\C-c"
   dialog.message 'あなたのターンです', center: true, y: 1
   tmp_msgs = messages.clone
 
-  if key == "\e"
-    if STDIN.getch == '['
-      case STDIN.getch
-      when 'A'
-        i_cursor -= 1  if i_cursor.positive?
-      when 'B'
-        i_cursor += 1  if i_cursor < messages.length - 1
-      end
+  if key == "\e" && (STDIN.getch == '[')
+    case STDIN.getch
+    when 'A'
+      i_cursor -= 1  if i_cursor.positive?
+    when 'B'
+      i_cursor += 1  if i_cursor < messages.length - 1
     end
   end
 

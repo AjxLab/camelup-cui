@@ -30,7 +30,7 @@ class Dialog
   end
 
   def reset
-    message *frame
+    message(*frame)
   end
 
   private
