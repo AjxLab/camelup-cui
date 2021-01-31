@@ -57,6 +57,3 @@ build-iPhoneSimulator/
 
 # rspec
 .rspec_status
-
-# local conf
-UI.drawio

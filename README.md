@@ -2,6 +2,8 @@
 
 Play CamelUp on the terminal!
 
+![](./media/UI.png)
+
 ## Requirements
 
 - Ubuntu 20.04
