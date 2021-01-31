@@ -30,21 +30,22 @@ dialog.message(
 )
 
 current_line = 0
-while (key = STDIN.getch) != "\C-c"
+while (key = $stdin.getch) != "\C-c"
+  next unless key == "\e" && ($stdin.getch == '[')
+
   dialog.message 'あなたのターンです', center: true, y: 1
   tmp_msgs = messages.clone
 
-  if key == "\e" && (STDIN.getch == '[')
-    case STDIN.getch
-    when 'A'
-      current_line -= 1  if current_line.positive?
-    when 'B'
-      current_line += 1  if current_line < messages.length - 1
-    end
+  # 入力キーで分岐
+  case $stdin.getch
+  when 'A'
+    current_line -= 1  if current_line.positive?
+  when 'B'
+    current_line += 1  if current_line < messages.length - 1
   end
 
   tmp_msgs.map!.with_index { |msg, i| i == current_line ? "> #{msg}" : "  #{msg}" }
-  tmp_msgs.map! { |msg| msg + '  ' }
+  tmp_msgs.map! { |msg| "#{msg}  " }
   dialog.message(
     *tmp_msgs,
     x: 10 - 2,
