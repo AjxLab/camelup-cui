@@ -10,22 +10,18 @@ Play CamelUp on the terminal!
 ## Installation
 
 ```sh
-$ git clone <this repo>
-$ cd <this repo>
-
 $ bundle install
 ```
 
 ## Usage
 
-### Play CamelUP
+### Play
 
 ```sh
-$ ./src/camelup.rb
+$ bundle exec src/camelup.rb
 ```
 
-### Run Tests
+### Raketask
 
-```sh
-$ rspec spec/*.rb
-```
+- `bundle exec rake test` - run tests
+- `bundle exec rake rubocop` - run rubocop checks
