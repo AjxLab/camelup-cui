@@ -5,7 +5,7 @@ Play CamelUp on the terminal!
 ## Requirements
 
 - Ubuntu 20.04
-- Ruby ~> 2.7
+- Ruby ~> 3.0
 
 ## Installation
 
