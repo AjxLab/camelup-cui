@@ -6,6 +6,8 @@ class Window
   def initialize(delta_rate, size_rate, fullsize = nil)
     # delta_rate: 開始座標（フルサイズとの比率）
     # size_rate: フルサイズと縦横幅の比率
+    raise ArgumentError unless delta_rate[0] + size_rate[0] <= 100
+    raise ArgumentError unless delta_rate[1] + size_rate[1] <= 100
 
     @sub_windows = []
 
