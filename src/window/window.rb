@@ -2,6 +2,7 @@
 
 class Window
   attr_reader :position, :size
+  attr_reader :sub_windows
 
   def initialize(pos_rate, size_rate, fullsize = nil)
     # pos_rate: フルサイズと開始座標の比率
@@ -16,9 +17,13 @@ class Window
     resize!(fullsize)
   end
 
-  def register_sub(window)
+  def register_sub!(window)
     @sub_windows << window
     resize_sub!
+  end
+
+  def unregister_sub!(window)
+    @sub_windows.delete(window)
   end
 
   def resize!(fullsize = nil)
