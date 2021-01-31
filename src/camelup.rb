@@ -29,7 +29,7 @@ dialog.message(
   y: 3
 )
 
-i_cursor = 0
+current_line = 0
 while (key = STDIN.getch) != "\C-c"
   dialog.message 'あなたのターンです', center: true, y: 1
   tmp_msgs = messages.clone
@@ -37,17 +37,17 @@ while (key = STDIN.getch) != "\C-c"
   if key == "\e" && (STDIN.getch == '[')
     case STDIN.getch
     when 'A'
-      i_cursor -= 1  if i_cursor.positive?
+      current_line -= 1  if current_line.positive?
     when 'B'
-      i_cursor += 1  if i_cursor < messages.length - 1
+      current_line += 1  if current_line < messages.length - 1
     end
   end
 
-  tmp_msgs[i_cursor] = '> ' + tmp_msgs[i_cursor]
+  tmp_msgs.map!.with_index { |msg, i| i == current_line ? "> #{msg}" : "  #{msg}" }
   tmp_msgs.map! { |msg| msg + '  ' }
   dialog.message(
     *tmp_msgs,
-    x: 10,
+    x: 10 - 2,
     y: 3
   )
 end
